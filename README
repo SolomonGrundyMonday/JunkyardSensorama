@@ -1,0 +1,5 @@
+Thus far we just have a script for the required keyboard functions.  The keyboard presses defined so far are:
+Press "+" on the numpad to increase the IPD.
+Press "-" on the numpad to decrease the IPD.
+Press "B" on the keyboard to toggle the binocular/monocular stereoscopic camera.
+Press "V" on the keyboard to toggle first and third person view (not yet implemented).
