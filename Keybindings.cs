@@ -16,6 +16,8 @@ public class Keybindings : MonoBehaviour
         GameObject leftCamera = GameObject.Find("Left");
         GameObject rightCamera = GameObject.Find("Right");
         GameObject mono = GameObject.Find("Mono");
+        GameObject thirdPerson = GameObject.Find("ThirdPerson");
+        bool isThirdPerson = thirdPerson.GetComponent<Camera>().enabled;
 
         if(Input.GetKeyDown(KeyCode.KeypadPlus))
         {
@@ -31,14 +33,33 @@ public class Keybindings : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.V))
         {
-            // Do stuff here to toggle between first-person and third-person view once the cameras have been set up.
+            bool isMono = mono.GetComponent<Camera>().enabled;
+            bool isStereo = leftCamera.GetComponent<Camera>().enabled;
+            if(isStereo)
+            {
+                leftCamera.GetComponent<Camera>().enabled = false;
+                rightCamera.GetComponent<Camera>().enabled = false;
+                thirdPerson.GetComponent<Camera>().enabled = true;
+            }else if(isMono)
+            {
+                mono.GetComponent<Camera>().enabled = false;
+                thirdPerson.GetComponent<Camera>().enabled = true;
+            }else
+            {
+                thirdPerson.GetComponent<Camera>().enabled = false;
+                mono.GetComponent<Camera>().enabled = true;
+            }
+
         }
         if(Input.GetKeyDown(KeyCode.B))
         {
             // Toggle monocular/binocular stereoscopic cameras.
-            leftCamera.GetComponent<Camera>().enabled = !leftCamera.GetComponent<Camera>().enabled;
-            rightCamera.GetComponent<Camera>().enabled = !rightCamera.GetComponent<Camera>().enabled;
-            mono.GetComponent<Camera>().enabled = !mono.GetComponent<Camera>().enabled;
+            if (!isThirdPerson)
+            {
+                leftCamera.GetComponent<Camera>().enabled = !leftCamera.GetComponent<Camera>().enabled;
+                rightCamera.GetComponent<Camera>().enabled = !rightCamera.GetComponent<Camera>().enabled;
+                mono.GetComponent<Camera>().enabled = !mono.GetComponent<Camera>().enabled;
+            }
         }
     }
 }
