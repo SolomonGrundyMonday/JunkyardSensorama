@@ -61,5 +61,10 @@ public class Keybindings : MonoBehaviour
                 mono.GetComponent<Camera>().enabled = !mono.GetComponent<Camera>().enabled;
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }
